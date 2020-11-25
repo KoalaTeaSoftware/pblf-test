@@ -1,0 +1,108 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2020-11-25T11:29:55.921Z",
+        "before": [
+          {
+            "result": {
+              "duration": 3995548200,
+              "status": "passed"
+            },
+            "match": {
+              "location": "testFramework.Hooks.beforeScenario(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "Visit a page",
+        "description": "",
+        "id": "sut-page-titles-and-delivery;visit-a-page",
+        "after": [
+          {
+            "result": {
+              "duration": 734410000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "testFramework.Hooks.afterScenario(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 9998300,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "I navigate to the page \"\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"\"",
+                  "offset": 23
+                }
+              ],
+              "location": "testFramework.steps.HtmlPageSteps.iNavigateToThePage(java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 3981098400,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "the page is fully drawn",
+            "match": {
+              "location": "testSuite.steps.CommonSteps.thePageIsFullyDrawn()"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 1000500,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "the page title is \"PBLF: Home\"",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"PBLF: Home\"",
+                  "offset": 18
+                }
+              ],
+              "location": "testFramework.steps.HtmlPageSteps.thePageTitleIs(java.lang.String)"
+            },
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@smoke"
+          }
+        ]
+      }
+    ],
+    "name": "SUT Page titles and delivery",
+    "description": "  If these pages do not draw fully, then further testing is very likely to give false failures.",
+    "id": "sut-page-titles-and-delivery",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/testSuite/features/smoke.feature",
+    "tags": [
+      {
+        "name": "@smoke",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]

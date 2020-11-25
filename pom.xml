@@ -4,34 +4,36 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>koalata-software.com</groupId>
-    <artifactId>UITest</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>com.koalateasoftware</groupId>
+    <artifactId>PBLF</artifactId>
+    <version>1.0</version>
 
     <!-- see https://github.com/cucumber/cucumber-java-skeleton/blob/master/pom.xml -->
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <junit.version>4.12</junit.version>
-        <cucumber.version>5.0.0-RC1</cucumber.version>
+        <!--cucumber.version>5.0.0-RC1</cucumber.version - this version is what I saw in the documentation -->
+        <!-- 5.4.0 is what is found by Intellij when it tries to fill dependencies -->
+        <cucumber.version>5.4.0</cucumber.version>
         <maven.compiler.version>3.3</maven.compiler.version>
     </properties>
 
     <dependencies>
-        <!-- Fundamental - gives @Given and so on -->
+        <!-- fundamental - give @Given and so on -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-        <!-- I think this enables the setting-up of test runners -->
-        <!--dependency>
+        <!-- Needed for test runners -->
+        <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>${cucumber.version}</version>
             <scope>test</scope>
-        </dependency-->
+        </dependency>
         <!--without _one_ of the following 2, it can't find things like org.openqa, so might as well have both -->
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver -->
         <dependency>
@@ -45,6 +47,52 @@
             <artifactId>selenium-chrome-driver</artifactId>
             <version>3.141.59</version>
         </dependency>
+        <!-- selenium-support is needed for the page factory -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-support</artifactId>
+            <version>4.0.0-alpha-4</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- see https://github.com/bonigarcia/webdrivermanager - this could simplify web driver management -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.2.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- to provide prettier HTML reports -->
+        <dependency>
+            <groupId>de.monochromata.cucumber</groupId>
+            <artifactId>reporting-plugin</artifactId>
+            <version>4.0.29</version>
+        </dependency>
+
+        <!-- Ability to talk to HTTP servers -->
+        <!-- https://mvnrepository.com/artifact/io.appium/java-client -->
+        <dependency>
+            <groupId>io.appium</groupId>
+            <artifactId>java-client</artifactId>
+            <version>4.1.2</version>
+        </dependency>
+
+        <!-- parsing of JSON -->
+        <!-- https://mvnrepository.com/artifact/org.json/json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20190722</version>
+        </dependency>
+
+        <!-- for the soft asserts -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>7.1.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -59,6 +107,21 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <!-- to allow Maven to know how to run the cucumber tests -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <includes>
+                        <!-- Run all testSuite test runners -->
+                        <include>**/testSuite/runners/*.java</include>
+                    </includes>
+                    <testFailureIgnore>false</testFailureIgnore>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
 </project>
