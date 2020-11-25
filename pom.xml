@@ -118,7 +118,7 @@
                         <!-- Run all testSuite test runners -->
                         <include>**/testSuite/runners/*.java</include>
                     </includes>
-                    <testFailureIgnore>false</testFailureIgnore>
+                    <failIfNoTests>true</failIfNoTests>
                 </configuration>
             </plugin>
         </plugins>
