@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
         },
         plugin = {
                 "pretty",
-//                "html:target/stdReports.html",
+                "html:target/stdReports.html",
                 "json:target/cucumber.json",
                 // see https://gitlab.com/monochromata-de/cucumber-reporting-plugin
                 "de.monochromata.cucumber.report.PrettyReports:target/"
