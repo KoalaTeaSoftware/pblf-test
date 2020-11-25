@@ -8,8 +8,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import testFramework.Context;
 import testFramework.objects.HtmlPageObject;
 
-import java.time.Duration;
-
 /**
  * All of the pages of this web site have common furniture (nav bar, contents-zone, footer)
  */
@@ -24,7 +22,7 @@ public class CommonPage extends HtmlPageObject {
     public CommonPage(WebDriver driver) {
         super(driver);
         myDriver = driver;
-        new WebDriverWait(Context.defaultDriver, Duration.ofSeconds(Context.pageLoadWait))
+        new WebDriverWait(Context.defaultDriver, Context.pageLoadWait)
                 // use the 'presence', i.e. is the element actually in the DOM? - expect it to not be visible in plenty of cases
                 .until(ExpectedConditions.presenceOfElementLocated(lastElement));
     }

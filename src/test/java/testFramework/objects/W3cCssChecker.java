@@ -5,8 +5,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testFramework.Context;
 
-import java.time.Duration;
-
 public class W3cCssChecker {
     /**
      * It is best to aim this directly at the single files that you create.
@@ -14,7 +12,7 @@ public class W3cCssChecker {
      *
      * @param urlOfCssFile - make it a single file.Scheme is not necessary
      */
-    public W3cCssChecker(String urlOfCssFile, Duration tout) {
+    public W3cCssChecker(String urlOfCssFile, long timeOutSeconds) {
         String fullUrl = "http://jigsaw.w3.org/css-validator/validator?uri=";
         fullUrl += urlOfCssFile;
         //noinspection SpellCheckingInspection
@@ -22,7 +20,7 @@ public class W3cCssChecker {
 
         Context.defaultActor.getResource(fullUrl);
 
-        new WebDriverWait(Context.defaultDriver, tout)
+        new WebDriverWait(Context.defaultDriver, timeOutSeconds)
                 // use the 'presence', i.e. is the element actually in the DOM - it may not be visible
                 .until(ExpectedConditions.titleContains("W3C CSS Validator results for "));
 

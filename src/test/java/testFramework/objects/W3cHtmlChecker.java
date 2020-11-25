@@ -6,8 +6,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testFramework.Context;
 
-import java.time.Duration;
-
 public class W3cHtmlChecker {
     //    Context.defaultDriver.findElement(By.xpath("/html/body/ol/li[@class='error']/ancestor::ol")).getAttribute("outerHTML")
     private final By errorList = By.xpath("//li[@class='error']/ancestor::ol");
@@ -18,14 +16,14 @@ public class W3cHtmlChecker {
      *
      * @param urlOfHtmlFile - make it a single file.Scheme is not necessary
      */
-    public W3cHtmlChecker(String urlOfHtmlFile, Duration tout) {
+    public W3cHtmlChecker(String urlOfHtmlFile, long timeOutSeconds) {
         String sut = "https://html5.validator.nu/?doc=";
         sut += urlOfHtmlFile;
         sut += "&parser=html";
 
         Context.defaultActor.getResource(sut);
 
-        new WebDriverWait(Context.defaultDriver, tout).
+        new WebDriverWait(Context.defaultDriver, timeOutSeconds).
                 until(ExpectedConditions.presenceOfElementLocated(By.className("details"))
                 );
     }

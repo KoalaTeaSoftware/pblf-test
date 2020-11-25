@@ -2,14 +2,14 @@ package testFramework.steps;
 
 import io.cucumber.java.en.Given;
 import org.junit.Assert;
-import testFramework.actors.Actor;
+import testFramework.helpers.ReportWriter;
 
 public class Framework {
 
     @Given("I write to the html report {string}")
     public void iWriteToTheHtmlReport(String arg0) {
         System.out.println(arg0);
-        Actor.writeToHtmlReport(arg0);
+        ReportWriter.writeToHtmlReport(arg0);
     }
 
     @Given("I fail a test")

@@ -5,25 +5,21 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
-import testFramework.helpers.resourceLocator;
+import testFramework.helpers.ResourceLocator;
 import testFramework.objects.W3cCssChecker;
 
-import java.time.Duration;
-
-import static testFramework.helpers.DateHelpers.humanReadableDuration;
-
 public class CssSyntaxCheckSteps {
-    final Duration tout = Duration.ofSeconds(25);
+    final long timeOutSeconds = 25;
     private W3cCssChecker w3cCssValidator = null;
     private String url;
 
     @Given("the w3C CSS tester reviews the file {string}")
     public void theWCCSSTesterReviewsTheFile(String urlOfFile) {
-        this.url = resourceLocator.interpretURL(urlOfFile);
+        this.url = ResourceLocator.interpretURL(urlOfFile);
         try {
-            w3cCssValidator = new W3cCssChecker(url, tout);
+            w3cCssValidator = new W3cCssChecker(url, timeOutSeconds);
         } catch (TimeoutException e) {
-            Assert.fail("Failed to find results from:" + url + ": in " + humanReadableDuration(tout) + " seconds");
+            Assert.fail("Failed to find results from:" + url + ": in " + timeOutSeconds + " seconds");
         }
 
     }

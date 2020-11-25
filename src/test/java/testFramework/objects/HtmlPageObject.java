@@ -7,11 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testFramework.Context;
-import testFramework.actors.Actor;
+import testFramework.helpers.ReportWriter;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.time.Duration;
 import java.util.List;
 
 public class HtmlPageObject {
@@ -19,7 +18,7 @@ public class HtmlPageObject {
 
     public HtmlPageObject(WebDriver driver) {
         this.myDriver = driver;
-        new WebDriverWait(Context.defaultDriver, Duration.ofSeconds(Context.pageLoadWait))
+        new WebDriverWait(Context.defaultDriver, (long) Context.pageLoadWait)
                 // use the 'presence', i.e. is the element actually in the DOM - it may not be visible
                 .until(ExpectedConditions.presenceOfElementLocated(By.tagName("BODY")));
         // OK, Selenium is supposed to do this, but let's make it specific
@@ -65,7 +64,7 @@ public class HtmlPageObject {
                     state = js.executeScript("return document.readyState").toString();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Actor.writeToHtmlReport("Failed to get document state " + e.getMessage());
+                    ReportWriter.writeToHtmlReport("Failed to get document state " + e.getMessage());
                     // Right at the beginning, if the browser has got nothing yet.
                     // we may hit "org.openqa.selenium.JavascriptException: javascript error: Cannot read property 'outerHTML' of null"
                     // In this case, we do not stop waiting.
@@ -81,7 +80,7 @@ public class HtmlPageObject {
                 }
             }
         else {
-            Actor.writeToHtmlReport("[warning] Unable to execute JavaScript to determine if page has loaded");
+            ReportWriter.writeToHtmlReport("[warning] Unable to execute JavaScript to determine if page has loaded");
         }
     }
 

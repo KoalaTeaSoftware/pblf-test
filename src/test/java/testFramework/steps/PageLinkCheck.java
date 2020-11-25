@@ -5,26 +5,22 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
-import testFramework.helpers.resourceLocator;
+import testFramework.helpers.ResourceLocator;
 import testFramework.objects.W3cLinkChecker;
 
-import java.time.Duration;
-
-import static testFramework.helpers.DateHelpers.humanReadableDuration;
-
 public class PageLinkCheck {
-    final Duration tout = Duration.ofSeconds(120); // the link checker can be quite slow
+    final long timeOutSeconds = 120; // the link checker can be quite slow
 
     private W3cLinkChecker w3cLinkChecker;
     private String url;
 
     @Given("the w3c link checker reviews the file {string}")
     public void theW3CLinkCheckerReviewsTheFile(String urlOfFile) {
-        url = resourceLocator.interpretURL(urlOfFile);
+        url = ResourceLocator.interpretURL(urlOfFile);
         try {
-            w3cLinkChecker = new W3cLinkChecker(url, tout);
+            w3cLinkChecker = new W3cLinkChecker(url, timeOutSeconds);
         } catch (TimeoutException e) {
-            Assert.fail("Failed to find results from:" + url + ": in " + humanReadableDuration(tout) + " seconds");
+            Assert.fail("Failed to find results from:" + url + ": in " + timeOutSeconds + " seconds");
         }
     }
 

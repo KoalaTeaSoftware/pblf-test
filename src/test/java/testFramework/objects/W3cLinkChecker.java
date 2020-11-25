@@ -6,9 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testFramework.Context;
-import testFramework.actors.Actor;
-
-import java.time.Duration;
+import testFramework.helpers.ReportWriter;
 
 public class W3cLinkChecker {
 
@@ -18,7 +16,7 @@ public class W3cLinkChecker {
      *
      * @param urlOfCssFile - make it a single file.Scheme is not necessary
      */
-    public W3cLinkChecker(String urlOfCssFile, Duration tout) throws TimeoutException {
+    public W3cLinkChecker(String urlOfCssFile, long tout) throws TimeoutException {
         String sut = "https://validator.w3.org/checklink?uri=";
         sut += urlOfCssFile;
         sut += "&summary=on&hide_type=all&depth=&check=Check";
@@ -35,8 +33,8 @@ public class W3cLinkChecker {
         // the first h3 tells you the result
         if (Context.defaultDriver.findElement(By.tagName("h3")).getText().toLowerCase().contains("broken links")) {
             // it definitely says there is a problem
-            Actor.writeToHtmlReport("Found evidence of broken links (an H3 saying just that)");
-            Actor.writeToHtmlReport(Context.defaultDriver.findElement(By.xpath("//dl[@class='report']")).getAttribute("innerHTML"));
+            ReportWriter.writeToHtmlReport("Found evidence of broken links (an H3 saying just that)");
+            ReportWriter.writeToHtmlReport(Context.defaultDriver.findElement(By.xpath("//dl[@class='report']")).getAttribute("innerHTML"));
             return false;
         }
         // otherwise, hunt for the p that specifically indicates success
@@ -45,7 +43,7 @@ public class W3cLinkChecker {
                 return true;
         }
         // failing anything good, default to failure
-        Actor.writeToHtmlReport("Failed to find evidence of valid links (a P saying just that)");
+        ReportWriter.writeToHtmlReport("Failed to find evidence of valid links (a P saying just that)");
         return false;
     }
 }

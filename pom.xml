@@ -9,14 +9,23 @@
     <version>1.0</version>
 
     <!-- see https://github.com/cucumber/cucumber-java-skeleton/blob/master/pom.xml -->
+
     <properties>
+        <!-- all the latest versions as found by looking at the maven rep -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <junit.version>4.12</junit.version>
-        <!--cucumber.version>5.0.0-RC1</cucumber.version - this version is what I saw in the documentation -->
-        <!-- 5.4.0 is what is found by Intellij when it tries to fill dependencies -->
-        <cucumber.version>5.4.0</cucumber.version>
+        <java.appium.client>7.4.0</java.appium.client>
+        <cucumber.version>6.9.0</cucumber.version>
         <maven.compiler.version>3.3</maven.compiler.version>
+        <maven.surefire.plugin>2.22.2</maven.surefire.plugin> <!-- latest without M suffix -->
+        <org.json>20201115</org.json>
+        <org.testng>7.3.0</org.testng>
+        <selenium.chrome.driver>3.141.59</selenium.chrome.driver>
+        <selenium.firefox.driver>3.141.59</selenium.firefox.driver>
+        <selenium.support>3.141.59</selenium.support>
+        <bonigarcia.webdrivermanager>4.2.2</bonigarcia.webdrivermanager>
+        <de.monochromata>4.0.86</de.monochromata>
     </properties>
 
     <dependencies>
@@ -39,26 +48,26 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-firefox-driver</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.firefox.driver}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-chrome-driver</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.chrome.driver}</version>
         </dependency>
         <!-- selenium-support is needed for the page factory -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
-            <version>4.0.0-alpha-4</version>
+            <version>${selenium.support}</version>
             <scope>test</scope>
         </dependency>
         <!-- see https://github.com/bonigarcia/webdrivermanager - this could simplify web driver management -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>4.2.2</version>
+            <version>${bonigarcia.webdrivermanager}</version>
             <scope>test</scope>
         </dependency>
 
@@ -66,7 +75,8 @@
         <dependency>
             <groupId>de.monochromata.cucumber</groupId>
             <artifactId>reporting-plugin</artifactId>
-            <version>4.0.29</version>
+            <version>${de.monochromata}</version>
+            <scope>test</scope>
         </dependency>
 
         <!-- Ability to talk to HTTP servers -->
@@ -74,7 +84,7 @@
         <dependency>
             <groupId>io.appium</groupId>
             <artifactId>java-client</artifactId>
-            <version>4.1.2</version>
+            <version>${java.appium.client}</version>
         </dependency>
 
         <!-- parsing of JSON -->
@@ -82,16 +92,29 @@
         <dependency>
             <groupId>org.json</groupId>
             <artifactId>json</artifactId>
-            <version>20190722</version>
+            <version>${org.json}</version>
         </dependency>
 
         <!-- for the soft asserts -->
+
+
+        <!--
+        this eliminates an error message about slf4j that comes about because of the use of the web driver manager
+        It fails to solve the problem about it running a test, but not knowing that it has run any test -->
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.1.0</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.30</version>
             <scope>test</scope>
         </dependency>
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.testng</groupId>-->
+        <!--            <artifactId>testng</artifactId>-->
+        <!--            <version>${org.testng}</version>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
 
     </dependencies>
 
