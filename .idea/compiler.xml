@@ -6,12 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="Period Brit. Lit. Films" />
         <module name="UITest" />
-        <module name="Swords-and-clapboards" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="Swords-and-clapboards" target="1.8" />
+      <module name="Period Brit. Lit. Films" target="1.8" />
       <module name="UITest" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -20,7 +20,6 @@
         <maven.compiler.version>3.3</maven.compiler.version>
         <maven.surefire.plugin>2.22.2</maven.surefire.plugin> <!-- latest without M suffix -->
         <org.json>20201115</org.json>
-        <org.testng>7.3.0</org.testng>
         <selenium.chrome.driver>3.141.59</selenium.chrome.driver>
         <selenium.firefox.driver>3.141.59</selenium.firefox.driver>
         <selenium.support>3.141.59</selenium.support>
@@ -29,7 +28,7 @@
     </properties>
 
     <dependencies>
-        <!-- fundamental - give @Given and so on -->
+        <!-- fundamental - gives @Given and so on -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -56,18 +55,32 @@
             <artifactId>selenium-chrome-driver</artifactId>
             <version>${selenium.chrome.driver}</version>
         </dependency>
-        <!-- selenium-support is needed for the page factory -->
+        <!-- This is needed for the page factory -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
             <version>${selenium.support}</version>
             <scope>test</scope>
         </dependency>
-        <!-- see https://github.com/bonigarcia/webdrivermanager - this could simplify web driver management -->
+        <!--
+         This greatly simplifies the creation of web drivers, and is especially useful when running in a CI env (eg GitHub)
+         Because it will be run in a clean environment, where a web driver does not yet exist
+         see https://github.com/bonigarcia/webdrivermanager
+        -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>${bonigarcia.webdrivermanager}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--
+        Sadly, the bonigarcia we driver manager will cause warnings, this eliminates them
+        see https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
+        -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.30</version>
             <scope>test</scope>
         </dependency>
 
@@ -95,27 +108,6 @@
             <version>${org.json}</version>
         </dependency>
 
-        <!-- for the soft asserts -->
-
-
-        <!--
-        this eliminates an error message about slf4j that comes about because of the use of the web driver manager
-        It fails to solve the problem about it running a test, but not knowing that it has run any test -->
-        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.30</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!--        <dependency>-->
-        <!--            <groupId>org.testng</groupId>-->
-        <!--            <artifactId>testng</artifactId>-->
-        <!--            <version>${org.testng}</version>-->
-        <!--            <scope>test</scope>-->
-        <!--        </dependency>-->
-
     </dependencies>
 
     <build>
@@ -132,7 +124,7 @@
             </plugin>
 
             <plugin>
-                <!-- to allow Maven to know how to run the cucumber tests -->
+                <!-- Without this Maven does know how to run the cucumber tests -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
